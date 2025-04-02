@@ -1,3 +1,4 @@
+import Managers.DoctorManager;
 import Managers.PatientManager;
 
 import java.util.Scanner;
@@ -13,8 +14,8 @@ public class Main {
             System.out.println("2. Add New Appointment");
             System.out.println("3. Add New Doctor");
             System.out.println("4. Add New Patient");
-            System.out.println("6. Special Button");
-            System.out.println("7. Exit");
+            System.out.println("5. Special Button");
+            System.out.println("6. Exit");
             System.out.println("-------------------");
             System.out.print("Please select an option: ");
 
@@ -36,7 +37,9 @@ public class Main {
                     break;
                 case 3:
                     System.out.println("Adding Doctor...");
-                    // Add your logic to add a doctor here
+                    System.out.println("-----------------------");
+                    DoctorManager.addDoctor(scanner);
+                    System.out.println("-----------------------");
                     break;
                 case 4:
                     System.out.println("Adding Patient...");
@@ -45,7 +48,9 @@ public class Main {
                     System.out.println("-----------------------");
                     break;
                 case 5:
+                    System.out.println("-----------------------");
                     System.out.println("MUNDO SALVA VIDAS!!!");
+                    System.out.println("-----------------------");
                     break;
                 case 6:
                     System.out.println("Exiting...");

@@ -4,10 +4,10 @@ import java.util.Date;
 
 public class Doctor extends Person{
     private String specialty;
-    private Date contract;
+    private String contract;
     private String code;
 
-    public Doctor(String name, String lastName, String DUI, int age, String specialty, Date contract, String code) {
+    public Doctor(String name, String lastName, String DUI, int age, String specialty, String contract, String code) {
         super(name, lastName, DUI, age);
         this.specialty = specialty;
         this.contract = contract;
@@ -22,11 +22,11 @@ public class Doctor extends Person{
         this.specialty = specialty;
     }
 
-    public Date getContract() {
+    public String getContract() {
         return contract;
     }
 
-    public void setContract(Date contract) {
+    public void setContract(String contract) {
         this.contract = contract;
     }
 
