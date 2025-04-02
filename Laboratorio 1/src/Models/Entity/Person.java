@@ -4,9 +4,9 @@ public class Person {
     private String name;
     private String lastName;
     private String DUI;
-    private int age;
+    private Integer age;
 
-    public Person(String name, String lastName, String DUI, int age) {
+    public Person(String name, String lastName, String DUI, Integer age) {
         this.name = name;
         this.lastName = lastName;
         this.DUI = DUI;
