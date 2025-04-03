@@ -17,6 +17,10 @@ public class Cita {
         this.time = time;
     }
 
+    public Cita(String patientName, String doctor, Date date, String timeStr) {
+
+    }
+
     public Person getPatient() {
         return patient;
     }

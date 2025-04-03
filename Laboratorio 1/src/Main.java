@@ -1,3 +1,4 @@
+import Managers.CitaManager;
 import Managers.DoctorManager;
 import Managers.PatientManager;
 
@@ -28,12 +29,12 @@ public class Main {
 
             switch(option){
                 case 1:
-                    System.out.println("Adding date...");
-                    // Add your logic to add a date here
+                    System.out.println("Showing date...");
+                    CitaManager.listAppointments();
                     break;
                 case 2:
-                    System.out.println("Showing date...");
-                    // Add your logic to show a date here
+                    System.out.println("Adding date...");
+                    CitaManager.addCita(scanner);
                     break;
                 case 3:
                     System.out.println("Adding Doctor...");
