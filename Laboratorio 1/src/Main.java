@@ -10,15 +10,17 @@ public class Main {
         int option = 0;
 
         do{
-            System.out.println("-----MAIN MENU-----");
-            System.out.println("1. View All Appointment");
-            System.out.println("2. Add New Appointment");
-            System.out.println("3. Add New Doctor");
-            System.out.println("4. Add New Patient");
-            System.out.println("5. Special Button");
-            System.out.println("6. Exit");
-            System.out.println("-------------------");
-            System.out.print("Please select an option: ");
+            System.out.println("╔════════════════════════╗");
+            System.out.println("║      📅 MAIN MENU      ║");
+            System.out.println("╠════════════════════════╣");
+            System.out.println("║ 1️⃣  View All Appointments ║");
+            System.out.println("║ 2️⃣  Add New Appointment   ║");
+            System.out.println("║ 3️⃣  Add New Doctor        ║");
+            System.out.println("║ 4️⃣  Add New Patient       ║");
+            System.out.println("║ 5️⃣  🔥 Special Button     ║");
+            System.out.println("║ 6️⃣  ❌ Exit               ║");
+            System.out.println("╚════════════════════════╝");
+            System.out.print("👉 Please select an option: ");
 
             while(!scanner.hasNextInt()) {
                 System.out.println("Please enter a valid option");
@@ -29,32 +31,36 @@ public class Main {
 
             switch(option){
                 case 1:
-                    System.out.println("Showing date...");
+                    System.out.println("📅 ──── Showing Appointments ────");
                     CitaManager.listAppointments();
+                    System.out.println("✅ Appointments displayed successfully!");
                     break;
                 case 2:
-                    System.out.println("Adding date...");
+                    System.out.println("📝 ──── Adding New Appointment ────");
                     CitaManager.addCita(scanner);
+                    System.out.println("✅ Appointment added successfully!");
                     break;
                 case 3:
-                    System.out.println("Adding Doctor...");
-                    System.out.println("-----------------------");
+                    System.out.println("👨‍⚕️ ──── Adding a New Doctor ────");
+                    System.out.println("════════════════════════════════");
                     DoctorManager.addDoctor(scanner);
-                    System.out.println("-----------------------");
+                    System.out.println("════════════════════════════════");
+                    System.out.println("✅ Doctor added successfully!");
                     break;
                 case 4:
-                    System.out.println("Adding Patient...");
-                    System.out.println("-----------------------");
+                    System.out.println("🩺 ──── Adding a New Patient ────");
+                    System.out.println("════════════════════════════════");
                     PatientManager.addPatient(scanner);
-                    System.out.println("-----------------------");
+                    System.out.println("════════════════════════════════");
+                    System.out.println("✅ Patient added successfully!");
                     break;
                 case 5:
-                    System.out.println("-----------------------");
-                    System.out.println("MUNDO SALVA VIDAS!!!");
-                    System.out.println("-----------------------");
+                    System.out.println("🚨 ──── SPECIAL BUTTON ────");
+                    System.out.println("🌍 MUNDO SALVA VIDAS!!! ❤️");
+                    System.out.println("════════════════════════════════");
                     break;
                 case 6:
-                    System.out.println("Exiting...");
+                    System.out.println("👋 Exiting... Thank you for using our system!");
                     break;
                 default:
                     System.out.println("Invalid option. Please try again.");
