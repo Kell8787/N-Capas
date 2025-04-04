@@ -38,21 +38,18 @@ public class Main {
                 case 2:
                     System.out.println("📝 ──── Adding New Appointment ────");
                     CitaManager.addCita(scanner);
-                    System.out.println("✅ Appointment added successfully!");
                     break;
                 case 3:
                     System.out.println("👨‍⚕️ ──── Adding a New Doctor ────");
                     System.out.println("════════════════════════════════");
                     DoctorManager.addDoctor(scanner);
                     System.out.println("════════════════════════════════");
-                    System.out.println("✅ Doctor added successfully!");
                     break;
                 case 4:
                     System.out.println("🩺 ──── Adding a New Patient ────");
                     System.out.println("════════════════════════════════");
                     PatientManager.addPatient(scanner);
                     System.out.println("════════════════════════════════");
-                    System.out.println("✅ Patient added successfully!");
                     break;
                 case 5:
                     System.out.println("🚨 ──── SPECIAL BUTTON ────");

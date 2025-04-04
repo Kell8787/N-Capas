@@ -117,7 +117,7 @@ public class CitaManager {
 
         Cita cita = new Cita(patientDUI, doctorName, date, time);
             citas.add(cita);
-            System.out.println("Cita added");
+        System.out.println("✅ Appointment added successfully!");
     }
 
     public static void listAppointments() {
@@ -126,6 +126,7 @@ public class CitaManager {
             return;
         }
         System.out.println("-------- Appointment List ----------");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         for (Cita cita : citas) {
             Date date = cita.getDate();
             if (date == null) {
@@ -137,12 +138,18 @@ public class CitaManager {
                 System.out.println("Invalid doctor information");
                 continue;
             }
-            String dateStr = date.toString();
-            String doctorName = doctor.getName();
+            String dateStr = dateFormat.format(date);
+            String doctorName = doctor.getName() + " " + doctor.getLastName();
             String patientName = cita.getPatient().getName();
             String specialty = doctor.getSpecialty();
+            String time = cita.getTime();
 
-            System.out.println(dateStr + " " + doctorName + " " + patientName + " " + specialty);
+            System.out.println("📅 Date: " + dateStr);
+            System.out.println("🕒 Time: " + time);
+            System.out.println("🏥 Specialty: " + specialty);
+            System.out.println("👨‍⚕️ Doctor: Dr." + doctorName);
+            System.out.println("🧑 Patient: " + patientName);
+            System.out.println("-----------------------------------------");
         }
     }
 

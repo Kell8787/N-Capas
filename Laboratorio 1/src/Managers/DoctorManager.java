@@ -83,7 +83,7 @@ public class DoctorManager {
 
         Doctor doctor = new Doctor(name, lastName, dui, age, specialty, contractDate,code);
         doctors.add(doctor);
-        System.out.println("Doctor added Successfully!");
+        System.out.println("✅ Doctor added successfully!");
     }
 
     private static String generateRandomCode() {

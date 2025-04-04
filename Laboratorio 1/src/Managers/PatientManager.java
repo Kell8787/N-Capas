@@ -42,7 +42,7 @@ public class PatientManager {
 
         Person patient = new Person(name, lastName, dui, age);
         patients.add(patient);
-        System.out.println("Patient added successfully!");
+        System.out.println("✅ Patient added successfully!");
     }
     public static void listPatients() {
         if (patients.isEmpty()) {
