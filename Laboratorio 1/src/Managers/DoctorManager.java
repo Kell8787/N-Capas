@@ -14,7 +14,6 @@ public class DoctorManager {
         return new ArrayList<>(doctors);
     }
 
-    Scanner scanner = new Scanner(System.in);
 
     public static void addDoctor(Scanner scanner) {
         System.out.println("Enter the doctor's name:");

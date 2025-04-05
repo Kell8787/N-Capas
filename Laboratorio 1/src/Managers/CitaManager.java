@@ -5,6 +5,7 @@ import Models.Entity.Doctor;
 import Models.Entity.Person;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.*;
 
 public class CitaManager {
@@ -24,11 +25,14 @@ public class CitaManager {
                 patientDUI = p;
                 break;
             }
-            else{
-                System.out.println("Patient not found. Please add the patient first.");
-                return;
-            }
         }
+
+        if (patientDUI == null) {
+            System.out.println("Patient not found. Please add the patient first.");
+            return;
+        }
+
+
 
         System.out.println("Enter Doctor´s name");
         String ScanDoctor = scanner.next();
@@ -74,11 +78,12 @@ public class CitaManager {
                 doctorName = d;
                 break;
             }
-            else{
+        }
+            if (doctorName == null) {
                 System.out.println("Doctor not found. Please add the doctor first.");
                 return;
             }
-        }
+
 
         System.out.println("Enter appointment date (YYYY-MM-DD)");
         String dateStr = scanner.next();
@@ -110,9 +115,36 @@ public class CitaManager {
             System.out.println("The time you entered is not valid!");
             return;
         }
-        if (isValidDate(date, time)) {
+        if (isValidDate(date, time, patientDUI, doctorName)) {
             System.out.println("The appointment already exists!");
             return;
+        }
+
+        LocalTime dateTime = LocalTime.parse(time);
+        LocalTime endTime = dateTime.plusHours(1);
+
+        for (Cita appointment : citas ) {
+            if (appointment.getPatient().equals(patientDUI) && appointment.getDate().equals(date)) {
+                LocalTime existingTime = LocalTime.parse(appointment.getTime());
+                LocalTime existingEndTime = endTime.plusHours(1);
+
+                if((dateTime.isBefore(existingEndTime) && endTime.isAfter(existingTime))){
+                    System.out.println("Patient already has an appointment at this time");
+                    return;
+                }
+            }
+        }
+
+        for(Cita appointment : citas) {
+            if(appointment.getDoctor().equals(doctorName) && appointment.getDate().equals(date)){
+                LocalTime existingTime = LocalTime.parse(appointment.getTime());
+                LocalTime existingEndTime = endTime.plusHours(1);
+
+                if((dateTime.isBefore(existingEndTime) && endTime.isAfter(existingTime))){
+                    System.out.println("Doctor already has an appointment at this time");
+                    return;
+                }
+            }
         }
 
         Cita cita = new Cita(patientDUI, doctorName, date, time);
@@ -164,9 +196,15 @@ public class CitaManager {
         }
     }
 
-    private static boolean isValidDate(Date date, String time) {
+    private static boolean isValidDate(Date date, String time, Person patient, Doctor doctor) {
         for (Cita appointment : citas) {
-            if (appointment.getDate().equals(date) && appointment.getTime().equals(time)) {
+            if (appointment.getDoctor().equals(doctor) && appointment.getDate().equals(date) && appointment.getTime().equals(time)) {
+                return true;
+            }
+        }
+
+        for (Cita appointment : citas) {
+            if (appointment.getPatient().equals(patient) && appointment.getDate().equals(date) && appointment.getTime().equals(time)) {
                 return true;
             }
         }
