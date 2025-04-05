@@ -12,7 +12,7 @@ public class CitaManager {
     private static final List<Cita> citas = new ArrayList<>();
 
     public static void addCita(Scanner scanner) {
-        System.out.println("Enter patient´s dui:");
+        System.out.println("Enter patient´s DUI:");
         String dui = scanner.next();
 
         List<Person> patients = new ArrayList<>(PatientManager.getPatients());
@@ -95,43 +95,25 @@ public class CitaManager {
             return;
         }
 
-        if (!isValidTime(time)) {
-            System.out.println("The time you entered is not valid!");
-            return;
-        }
         if (isValidDate(date, time, patientDUI, doctorName)) {
             System.out.println("The appointment already exists!");
             return;
         }
 
-        LocalTime dateTime = LocalTime.parse(time);
-
-        for (Cita appointment : citas ) {
-            if (appointment.getPatient().equals(patientDUI) && appointment.getDate().equals(date)) {
+        for (Cita appointment : citas) {
+            if (appointment.getDoctor().equals(doctorName) && appointment.getDate().equals(date)) {
                 LocalTime existingTime = LocalTime.parse(appointment.getTime());
-                LocalTime existingEndTime = endTime.plusHours(1);
+                LocalTime existingEndTime = existingTime.plusHours(1);
 
-                if((dateTime.isBefore(existingEndTime) && endTime.isAfter(existingTime))){
-                    System.out.println("Patient already has an appointment at this time");
-                    return;
-                }
-            }
-        }
-
-        for(Cita appointment : citas) {
-            if(appointment.getDoctor().equals(doctorName) && appointment.getDate().equals(date)){
-                LocalTime existingTime = LocalTime.parse(appointment.getTime());
-                LocalTime existingEndTime = endTime.plusHours(1);
-
-                if((dateTime.isBefore(existingEndTime) && endTime.isAfter(existingTime))){
-                    System.out.println("Doctor already has an appointment at this time");
+                if (!appointmentTime.isAfter(existingEndTime)) {
+                    System.out.println("Doctor already has an appointment at this time.");
                     return;
                 }
             }
         }
 
         Cita cita = new Cita(patientDUI, doctorName, date, time);
-            citas.add(cita);
+        citas.add(cita);
         System.out.println("✅ Appointment added successfully!");
     }
 
@@ -237,5 +219,9 @@ public class CitaManager {
         } else {
             System.out.println("No appointment found with the provided details.");
         }
+    }
+
+    public static List<Cita> getCitas() {
+        return new ArrayList<>(citas);
     }
 }

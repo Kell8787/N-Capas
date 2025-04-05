@@ -19,9 +19,11 @@ public class Main {
             System.out.println("║ 4️⃣  Add New Patient       ║");
             System.out.println("║ 5️⃣  Cancel Appointment    ║");
             System.out.println("║ 6️⃣  🔥 Special Button     ║");
-            System.out.println("║ 7️⃣  ❌ Exit               ║");
+            System.out.println("║ 7️⃣  View All Doctors      ║");
+            System.out.println("║ 8️⃣  Appointments by Doctor║");
+            System.out.println("║ 9️⃣  ❌ Exit               ║");
             System.out.println("╚════════════════════════╝");
-            System.out.print("👉 Please select an option: ");;
+            System.out.print("👉 Please select an option: ");
 
             while(!scanner.hasNextInt()) {
                 System.out.println("Please enter a valid option");
@@ -64,13 +66,25 @@ public class Main {
                     System.out.println("════════════════════════════════");
                     break;
                 case 7:
+                    System.out.println("👨‍⚕️ ──── Viewing All Doctors ────");
+                    System.out.println("════════════════════════════════");
+                    DoctorManager.viewAllDoctors();
+                    System.out.println("════════════════════════════════");
+                    break;
+                case 8:
+                    System.out.println("🔍 ──── Appointments by Doctor ────");
+                    System.out.print("Ingrese el código del doctor: ");
+                    String doctorCodeForAppointments = scanner.nextLine();
+                    DoctorManager.viewAppointmentsByDoctor(doctorCodeForAppointments);
+                    break;
+                case 9:
                     System.out.println("👋 Exiting... Thank you for using our system!");
                     break;
                 default:
                     System.out.println("Invalid option. Please try again.");
             }
         }
-        while(option != 7);
+        while(option != 9);
 
         scanner.close();
     }

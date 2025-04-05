@@ -1,16 +1,20 @@
 package Managers;
 
+import Models.Entity.Cita;
 import Models.Entity.Doctor;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class DoctorManager {
     private static final List<Doctor> doctors = new ArrayList<>();
     private static final Random random = new Random();
 
-    public static List<Doctor> getDoctors(){
+    public static List<Doctor> getDoctors() {
         return new ArrayList<>(doctors);
     }
 
@@ -53,7 +57,7 @@ public class DoctorManager {
 
         String code = generateRandomCode();
 
-        Doctor doctor = new Doctor(name, lastName, dui, age, specialty, contractDate,code);
+        Doctor doctor = new Doctor(name, lastName, dui, age, specialty, contractDate, code);
         doctors.add(doctor);
         System.out.println("✅ Doctor added successfully!");
     }
@@ -67,4 +71,44 @@ public class DoctorManager {
                 (char) ('A' + random.nextInt(26)) + // A
                 random.nextInt(10);
     }
+
+    public static void viewAllDoctors() {
+        if (doctors.isEmpty()) {
+            System.out.println("No hay doctores agendados.");
+        } else {
+            for (Doctor doctor : doctors) {
+                System.out.println("╔══════════════════════════════╗");
+                System.out.printf("║ 👨‍⚕️ Dr. %s %s%n", doctor.getName(), doctor.getLastName());
+                System.out.println("╠══════════════════════════════╣");
+                System.out.printf("║ 🆔 DUI: %s%n", doctor.getDUI());
+                System.out.printf("║ 🎂 Edad: %d%n", doctor.getAge());
+                System.out.printf("║ 🏥 Especialidad: %s%n", doctor.getSpecialty());
+                System.out.printf("║ 📄 Contrato: %s%n", doctor.getContract());
+                System.out.printf("║ 🧾 Código: %s%n", doctor.getCode());
+                System.out.println("╚══════════════════════════════╝");
+            }
+        }
+    }
+
+    public static void viewAppointmentsByDoctor(String doctorCode) {
+        List<Cita> citas = CitaManager.getCitas();
+        List<Cita> citasDelDoctor = citas.stream()
+                .filter(cita -> cita.getDoctor().getCode().equals(doctorCode))
+                .collect(Collectors.toList());
+
+        if (citasDelDoctor.isEmpty()) {
+            System.out.println("No hay citas agendadas para el doctor con código: " + doctorCode);
+        } else {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            for (Cita cita : citasDelDoctor) {
+                String dateStr = dateFormat.format(cita.getDate());
+                System.out.println("════════════════════════════════");
+                System.out.println("🧑 Patient: " + cita.getPatient().getName() + " " + cita.getPatient().getLastName());
+                System.out.println("📅 Date: " + dateStr);
+                System.out.println("🕒 Time: " + cita.getTime());
+                System.out.println("════════════════════════════════");
+            }
+        }
+    }
 }
+
