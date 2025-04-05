@@ -70,7 +70,7 @@ public class Main {
                     System.out.println("Invalid option. Please try again.");
             }
         }
-        while(option != 6);
+        while(option != 7);
 
         scanner.close();
     }

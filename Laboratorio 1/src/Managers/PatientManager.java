@@ -8,12 +8,9 @@ import java.util.Scanner;
 
 public class PatientManager {
     private static final List<Person> patients = new ArrayList<>();
-
     public static List<Person> getPatients() {
         return new ArrayList<>(patients);
     }
-
-    Scanner scanner = new Scanner(System.in);
 
     public static void addPatient(Scanner scanner) {
         System.out.println("Enter the patient's name:");

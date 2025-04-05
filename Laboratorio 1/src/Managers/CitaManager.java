@@ -10,8 +10,6 @@ import java.util.*;
 
 public class CitaManager {
     private static final List<Cita> citas = new ArrayList<>();
-    private static final List<Doctor> doctors = new ArrayList<>();
-
 
     public static void addCita(Scanner scanner) {
         System.out.println("Enter patient´s dui:");
@@ -32,42 +30,14 @@ public class CitaManager {
             return;
         }
 
-
-
         System.out.println("Enter Doctor´s name");
         String ScanDoctor = scanner.next();
 
-        System.out.println("Select the doctor's specialty:");
-        System.out.println("1. Cardiología");
-        System.out.println("2. Neurología");
-        System.out.println("3. Pediatría");
-        System.out.println("4. Dermatología");
-        System.out.println("5. Otra (especificar)");
+        String scanSpecialty = SelectSpecialty.selectSpecialty(scanner);
 
-        int specialtyOption = scanner.nextInt();
-        scanner.nextLine(); // Consumir la nueva línea
-
-        String scanSpecialty;
-        switch (specialtyOption) {
-            case 1:
-                scanSpecialty = "Cardiología";
-                break;
-            case 2:
-                scanSpecialty = "Neurología";
-                break;
-            case 3:
-                scanSpecialty = "Pediatría";
-                break;
-            case 4:
-                scanSpecialty = "Dermatología";
-                break;
-            case 5:
-                System.out.println("Enter the doctor's specialty:");
-                scanSpecialty = scanner.nextLine();
-                break;
-            default:
-                System.out.println("Invalid option. Please try again.");
-                return;
+        if (scanSpecialty == null) {
+            System.out.println("Invalid option. Please try again.");
+            return;
         }
 
         List<Doctor> doctors = new ArrayList<>(DoctorManager.getDoctors());
@@ -115,13 +85,26 @@ public class CitaManager {
             System.out.println("The time you entered is not valid!");
             return;
         }
+
+        LocalTime appointmentTime = LocalTime.parse(time);
+        LocalTime startTime = LocalTime.of(8, 0);
+        LocalTime endTime = LocalTime.of(16, 0);
+
+        if (appointmentTime.isBefore(startTime) || appointmentTime.isAfter(endTime)) {
+            System.out.println("Appointments can only be scheduled between 08:00 and 16:00.");
+            return;
+        }
+
+        if (!isValidTime(time)) {
+            System.out.println("The time you entered is not valid!");
+            return;
+        }
         if (isValidDate(date, time, patientDUI, doctorName)) {
             System.out.println("The appointment already exists!");
             return;
         }
 
         LocalTime dateTime = LocalTime.parse(time);
-        LocalTime endTime = dateTime.plusHours(1);
 
         for (Cita appointment : citas ) {
             if (appointment.getPatient().equals(patientDUI) && appointment.getDate().equals(date)) {
@@ -218,23 +201,23 @@ public class CitaManager {
     }
 
     public static void cancelAppointment(Scanner scanner) {
-        System.out.println("Ingrese el DUI del paciente:");
+        System.out.println("Enter the patient's DUI:");
         String patientDUI = scanner.next();
 
-        System.out.println("Ingrese el nombre del doctor:");
+        System.out.println("Enter the doctor's name:");
         String doctorName = scanner.next();
 
-        System.out.println("Ingrese la fecha de la cita (dd/MM/yyyy):");
+        System.out.println("Enter the appointment date (dd/MM/yyyy):");
         String dateStr = scanner.next();
         Date date;
         try {
             date = new SimpleDateFormat("dd/MM/yyyy").parse(dateStr);
         } catch (ParseException e) {
-            System.out.println("Fecha no válida. Por favor, intente de nuevo.");
+            System.out.println("Invalid date. Please try again.");
             return;
         }
 
-        System.out.println("Ingrese la hora de la cita (HH:MM):");
+        System.out.println("Enter the appointment time (HH:MM):");
         String time = scanner.next();
 
         Cita citaToRemove = null;
@@ -250,9 +233,9 @@ public class CitaManager {
 
         if (citaToRemove != null) {
             citas.remove(citaToRemove);
-            System.out.println("✅ Cita cancelada exitosamente!");
+            System.out.println("✅ Appointment successfully canceled!");
         } else {
-            System.out.println("No se encontró una cita con los detalles proporcionados.");
+            System.out.println("No appointment found with the provided details.");
         }
     }
 }
