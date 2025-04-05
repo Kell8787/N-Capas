@@ -14,7 +14,6 @@ public class DoctorManager {
         return new ArrayList<>(doctors);
     }
 
-
     public static void addDoctor(Scanner scanner) {
         System.out.println("Enter the doctor's name:");
         String name = scanner.next();
@@ -42,37 +41,11 @@ public class DoctorManager {
             }
         } while (!DuiValidation.isValidDui(dui) || !DuiValidation.isDuiUniqueForDoctors(dui, doctors));
 
-        System.out.println("Select the doctor's specialty:");
-        System.out.println("1. Cardiología");
-        System.out.println("2. Neurología");
-        System.out.println("3. Pediatría");
-        System.out.println("4. Dermatología");
-        System.out.println("5. Otra (especificar)");
+        String specialty = SelectSpecialty.selectSpecialty(scanner);
 
-        int specialtyOption = scanner.nextInt();
-        scanner.nextLine(); // Consumir la nueva línea
-
-        String specialty;
-        switch (specialtyOption) {
-            case 1:
-                specialty = "Cardiología";
-                break;
-            case 2:
-                specialty = "Neurología";
-                break;
-            case 3:
-                specialty = "Pediatría";
-                break;
-            case 4:
-                specialty = "Dermatología";
-                break;
-            case 5:
-                System.out.println("Enter the doctor's specialty:");
-                specialty = scanner.nextLine();
-                break;
-            default:
-                System.out.println("Invalid option. Please try again.");
-                return;
+        if (specialty == null) {
+            System.out.println("Invalid option. Please try again.");
+            return;
         }
 
         System.out.println("Enter the doctor's contract date (YYYY-MM-DD):");
