@@ -17,10 +17,11 @@ public class Main {
             System.out.println("║ 2️⃣  Add New Appointment   ║");
             System.out.println("║ 3️⃣  Add New Doctor        ║");
             System.out.println("║ 4️⃣  Add New Patient       ║");
-            System.out.println("║ 5️⃣  🔥 Special Button     ║");
-            System.out.println("║ 6️⃣  ❌ Exit               ║");
+            System.out.println("║ 5️⃣  Cancel Appointment    ║");
+            System.out.println("║ 6️⃣  🔥 Special Button     ║");
+            System.out.println("║ 7️⃣  ❌ Exit               ║");
             System.out.println("╚════════════════════════╝");
-            System.out.print("👉 Please select an option: ");
+            System.out.print("👉 Please select an option: ");;
 
             while(!scanner.hasNextInt()) {
                 System.out.println("Please enter a valid option");
@@ -52,11 +53,17 @@ public class Main {
                     System.out.println("════════════════════════════════");
                     break;
                 case 5:
+                    System.out.println("❌ ──── Canceling Appointment ────");
+                    System.out.println("════════════════════════════════");
+                    CitaManager.cancelAppointment(scanner);
+                    System.out.println("════════════════════════════════");
+                    break;
+                case 6:
                     System.out.println("🚨 ──── SPECIAL BUTTON ────");
                     System.out.println("🌍 MUNDO SALVA VIDAS!!! ❤️");
                     System.out.println("════════════════════════════════");
                     break;
-                case 6:
+                case 7:
                     System.out.println("👋 Exiting... Thank you for using our system!");
                     break;
                 default:

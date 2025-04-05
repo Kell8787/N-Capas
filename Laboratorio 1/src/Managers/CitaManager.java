@@ -216,4 +216,43 @@ public class CitaManager {
                 date1.getMonth() == date2.getMonth() &&
                 date1.getDate() == date2.getDate();
     }
+
+    public static void cancelAppointment(Scanner scanner) {
+        System.out.println("Ingrese el DUI del paciente:");
+        String patientDUI = scanner.next();
+
+        System.out.println("Ingrese el nombre del doctor:");
+        String doctorName = scanner.next();
+
+        System.out.println("Ingrese la fecha de la cita (dd/MM/yyyy):");
+        String dateStr = scanner.next();
+        Date date;
+        try {
+            date = new SimpleDateFormat("dd/MM/yyyy").parse(dateStr);
+        } catch (ParseException e) {
+            System.out.println("Fecha no válida. Por favor, intente de nuevo.");
+            return;
+        }
+
+        System.out.println("Ingrese la hora de la cita (HH:MM):");
+        String time = scanner.next();
+
+        Cita citaToRemove = null;
+        for (Cita cita : citas) {
+            if (cita.getPatient().getDUI().equals(patientDUI) &&
+                    cita.getDoctor().getName().equals(doctorName) &&
+                    cita.getDate().equals(date) &&
+                    cita.getTime().equals(time)) {
+                citaToRemove = cita;
+                break;
+            }
+        }
+
+        if (citaToRemove != null) {
+            citas.remove(citaToRemove);
+            System.out.println("✅ Cita cancelada exitosamente!");
+        } else {
+            System.out.println("No se encontró una cita con los detalles proporcionados.");
+        }
+    }
 }
