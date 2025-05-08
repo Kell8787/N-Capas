@@ -17,7 +17,6 @@ public class Sucursal {
 
     @Column
     private String nombreSucursal;
-
     @Column
     private String direccionSucursal;
 
