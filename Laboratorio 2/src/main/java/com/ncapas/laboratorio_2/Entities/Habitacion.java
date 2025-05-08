@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 public class Habitacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_habitacion", insertable = false, updatable = false)
     private Integer idHabitacion;
 
     @Column
