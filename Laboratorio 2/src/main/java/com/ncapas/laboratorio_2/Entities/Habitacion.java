@@ -23,7 +23,7 @@ public class Habitacion {
     private String descripcion;
 
     @Column
-    private Boolean tiene_balcon;
+    private Boolean tieneBalcon;
 
     @ManyToOne
     @JoinColumn(name="id_persona", nullable = false, foreignKey = @ForeignKey(name = "fk_hus_persona"))
