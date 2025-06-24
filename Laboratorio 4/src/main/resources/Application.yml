@@ -1,0 +1,27 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: demo-keycloak
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:3030/realms/Laboratorio-NCapas
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/labo4
+    username: postgres
+    password: admin
+
+keycloak:
+    server-url: http://localhost:3030
+    realm: Laboratorio-NCapas
+    client-id: backend-client
+    client-secret: 1Zpqrvi26TOzQjZP3ILmOt2tYikhn5qC
